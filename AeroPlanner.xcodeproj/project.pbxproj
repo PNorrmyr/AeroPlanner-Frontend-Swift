@@ -1,0 +1,563 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXContainerItemProxy section */
+		D48854E22DCC97E0003D8288 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D48854C92DCC97DE003D8288 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D48854D02DCC97DE003D8288;
+			remoteInfo = AeroPlanner;
+		};
+		D48854EC2DCC97E0003D8288 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D48854C92DCC97DE003D8288 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D48854D02DCC97DE003D8288;
+			remoteInfo = AeroPlanner;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		D48854D12DCC97DE003D8288 /* AeroPlanner.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AeroPlanner.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		D48854E12DCC97E0003D8288 /* AeroPlannerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AeroPlannerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		D48854EB2DCC97E0003D8288 /* AeroPlannerUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AeroPlannerUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		D48854D32DCC97DE003D8288 /* AeroPlanner */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = AeroPlanner;
+			sourceTree = "<group>";
+		};
+		D48854E42DCC97E0003D8288 /* AeroPlannerTests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = AeroPlannerTests;
+			sourceTree = "<group>";
+		};
+		D48854EE2DCC97E0003D8288 /* AeroPlannerUITests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = AeroPlannerUITests;
+			sourceTree = "<group>";
+		};
+/* End PBXFileSystemSynchronizedRootGroup section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		D48854CE2DCC97DE003D8288 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D48854DE2DCC97E0003D8288 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D48854E82DCC97E0003D8288 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		D48854C82DCC97DE003D8288 = {
+			isa = PBXGroup;
+			children = (
+				D48854D32DCC97DE003D8288 /* AeroPlanner */,
+				D48854E42DCC97E0003D8288 /* AeroPlannerTests */,
+				D48854EE2DCC97E0003D8288 /* AeroPlannerUITests */,
+				D48854D22DCC97DE003D8288 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		D48854D22DCC97DE003D8288 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				D48854D12DCC97DE003D8288 /* AeroPlanner.app */,
+				D48854E12DCC97E0003D8288 /* AeroPlannerTests.xctest */,
+				D48854EB2DCC97E0003D8288 /* AeroPlannerUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		D48854D02DCC97DE003D8288 /* AeroPlanner */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D48854F52DCC97E0003D8288 /* Build configuration list for PBXNativeTarget "AeroPlanner" */;
+			buildPhases = (
+				D48854CD2DCC97DE003D8288 /* Sources */,
+				D48854CE2DCC97DE003D8288 /* Frameworks */,
+				D48854CF2DCC97DE003D8288 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				D48854D32DCC97DE003D8288 /* AeroPlanner */,
+			);
+			name = AeroPlanner;
+			packageProductDependencies = (
+			);
+			productName = AeroPlanner;
+			productReference = D48854D12DCC97DE003D8288 /* AeroPlanner.app */;
+			productType = "com.apple.product-type.application";
+		};
+		D48854E02DCC97E0003D8288 /* AeroPlannerTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D48854F82DCC97E0003D8288 /* Build configuration list for PBXNativeTarget "AeroPlannerTests" */;
+			buildPhases = (
+				D48854DD2DCC97E0003D8288 /* Sources */,
+				D48854DE2DCC97E0003D8288 /* Frameworks */,
+				D48854DF2DCC97E0003D8288 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				D48854E32DCC97E0003D8288 /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				D48854E42DCC97E0003D8288 /* AeroPlannerTests */,
+			);
+			name = AeroPlannerTests;
+			packageProductDependencies = (
+			);
+			productName = AeroPlannerTests;
+			productReference = D48854E12DCC97E0003D8288 /* AeroPlannerTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		D48854EA2DCC97E0003D8288 /* AeroPlannerUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D48854FB2DCC97E0003D8288 /* Build configuration list for PBXNativeTarget "AeroPlannerUITests" */;
+			buildPhases = (
+				D48854E72DCC97E0003D8288 /* Sources */,
+				D48854E82DCC97E0003D8288 /* Frameworks */,
+				D48854E92DCC97E0003D8288 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				D48854ED2DCC97E0003D8288 /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				D48854EE2DCC97E0003D8288 /* AeroPlannerUITests */,
+			);
+			name = AeroPlannerUITests;
+			packageProductDependencies = (
+			);
+			productName = AeroPlannerUITests;
+			productReference = D48854EB2DCC97E0003D8288 /* AeroPlannerUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		D48854C92DCC97DE003D8288 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1620;
+				LastUpgradeCheck = 1620;
+				TargetAttributes = {
+					D48854D02DCC97DE003D8288 = {
+						CreatedOnToolsVersion = 16.2;
+					};
+					D48854E02DCC97E0003D8288 = {
+						CreatedOnToolsVersion = 16.2;
+						TestTargetID = D48854D02DCC97DE003D8288;
+					};
+					D48854EA2DCC97E0003D8288 = {
+						CreatedOnToolsVersion = 16.2;
+						TestTargetID = D48854D02DCC97DE003D8288;
+					};
+				};
+			};
+			buildConfigurationList = D48854CC2DCC97DE003D8288 /* Build configuration list for PBXProject "AeroPlanner" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = D48854C82DCC97DE003D8288;
+			minimizedProjectReferenceProxies = 1;
+			preferredProjectObjectVersion = 77;
+			productRefGroup = D48854D22DCC97DE003D8288 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				D48854D02DCC97DE003D8288 /* AeroPlanner */,
+				D48854E02DCC97E0003D8288 /* AeroPlannerTests */,
+				D48854EA2DCC97E0003D8288 /* AeroPlannerUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		D48854CF2DCC97DE003D8288 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D48854DF2DCC97E0003D8288 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D48854E92DCC97E0003D8288 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		D48854CD2DCC97DE003D8288 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D48854DD2DCC97E0003D8288 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D48854E72DCC97E0003D8288 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		D48854E32DCC97E0003D8288 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D48854D02DCC97DE003D8288 /* AeroPlanner */;
+			targetProxy = D48854E22DCC97E0003D8288 /* PBXContainerItemProxy */;
+		};
+		D48854ED2DCC97E0003D8288 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D48854D02DCC97DE003D8288 /* AeroPlanner */;
+			targetProxy = D48854EC2DCC97E0003D8288 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		D48854F32DCC97E0003D8288 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.2;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		D48854F42DCC97E0003D8288 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.2;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		D48854F62DCC97E0003D8288 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"AeroPlanner/Preview Content\"";
+				DEVELOPMENT_TEAM = TC6Q3GG349;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.AeroPlanner;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		D48854F72DCC97E0003D8288 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"AeroPlanner/Preview Content\"";
+				DEVELOPMENT_TEAM = TC6Q3GG349;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.AeroPlanner;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		D48854F92DCC97E0003D8288 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = TC6Q3GG349;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.2;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.AeroPlannerTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/AeroPlanner.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/AeroPlanner";
+			};
+			name = Debug;
+		};
+		D48854FA2DCC97E0003D8288 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = TC6Q3GG349;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.2;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.AeroPlannerTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/AeroPlanner.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/AeroPlanner";
+			};
+			name = Release;
+		};
+		D48854FC2DCC97E0003D8288 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = TC6Q3GG349;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.AeroPlannerUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = AeroPlanner;
+			};
+			name = Debug;
+		};
+		D48854FD2DCC97E0003D8288 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = TC6Q3GG349;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.AeroPlannerUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = AeroPlanner;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		D48854CC2DCC97DE003D8288 /* Build configuration list for PBXProject "AeroPlanner" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D48854F32DCC97E0003D8288 /* Debug */,
+				D48854F42DCC97E0003D8288 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D48854F52DCC97E0003D8288 /* Build configuration list for PBXNativeTarget "AeroPlanner" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D48854F62DCC97E0003D8288 /* Debug */,
+				D48854F72DCC97E0003D8288 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D48854F82DCC97E0003D8288 /* Build configuration list for PBXNativeTarget "AeroPlannerTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D48854F92DCC97E0003D8288 /* Debug */,
+				D48854FA2DCC97E0003D8288 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D48854FB2DCC97E0003D8288 /* Build configuration list for PBXNativeTarget "AeroPlannerUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D48854FC2DCC97E0003D8288 /* Debug */,
+				D48854FD2DCC97E0003D8288 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = D48854C92DCC97DE003D8288 /* Project object */;
+}
