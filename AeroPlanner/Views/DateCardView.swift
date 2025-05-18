@@ -5,52 +5,77 @@ struct DateCardView: View {
     @State private var showDetail = false
     @State private var selectedFlight: Flight? = nil
     
+    var isOff: Bool {
+        rosterDay.duty.lowercased() == "off"
+    }
+    
     var body: some View {
-        VStack(alignment: .leading, spacing: 8) {
+        VStack(spacing: isOff ? 4 : 12) {
             HStack {
                 Text(formattedDate(rosterDay.date))
-                    .font(.system(size: 22, weight: .semibold))
-                    .foregroundColor(.blue)
+                    .font(.headline)
+                    .fontDesign(.rounded)
+                    .foregroundColor(.primary)
+                
                 Spacer()
-                if let checkIn = rosterDay.check_in {
-                    HStack(spacing: 4) {
-                        Image(systemName: "arrow.right.circle")
-                            .foregroundColor(.green)
-                            .font(.system(size: 16, weight: .medium))
-                        Text(timeString(checkIn))
-                            .font(.system(size: 16, weight: .medium))
+                
+                Text(isOff ? "OFF" : rosterDay.duty)
+                    .font(.subheadline)
+                    .fontDesign(.rounded)
+                    .foregroundColor(.white)
+                    .padding(.horizontal, 12)
+                    .padding(.vertical, 4)
+                    .background(isOff ? Color.gray : Color.blue)
+                    .cornerRadius(8)
+            }
+            
+            // Check in/out och flygningar
+            if isOff {
+                Text("OFF")
+                    .font(.title2)
+                    .fontDesign(.rounded)
+                    .foregroundColor(.secondary)
+                    .frame(maxWidth: .infinity, alignment: .center)
+            } else {
+                HStack(spacing: 16) {
+                    if !rosterDay.flights.isEmpty {
+                        Text("\(rosterDay.flights.count) flights")
+                            .font(.subheadline)
+                            .fontDesign(.rounded)
+                            .foregroundColor(.secondary)
+                    }
+                    
+                    Spacer()
+                    
+                    if let checkIn = rosterDay.check_in, checkIn.uppercased() != "<NA>" {
+                        HStack(spacing: 4) {
+                            Image(systemName: "arrow.right.circle.fill")
+                                .foregroundColor(.green)
+                            Text(checkIn)
+                                .font(.subheadline)
+                        }
+                    }
+                    
+                    if let checkOut = rosterDay.check_out, checkOut.uppercased() != "<NA>" {
+                        HStack(spacing: 4) {
+                            Image(systemName: "arrow.right.circle.fill")
+                                .foregroundColor(.red)
+                            Text(checkOut)
+                                .font(.subheadline)
+                        }
                     }
                 }
-                if let checkOut = rosterDay.check_out {
-                    HStack(spacing: 4) {
-                        Image(systemName: "arrow.right.circle")
-                            .foregroundColor(.red)
-                            .font(.system(size: 16, weight: .medium))
-                        Text(timeString(checkOut))
-                            .font(.system(size: 16, weight: .medium))
-                    }
+                
+                if !rosterDay.flights.isEmpty {
+                    FlightSectionView(flights: rosterDay.flights)
                 }
             }
-            Divider()
-            VStack(spacing: 8) {
-                ForEach(rosterDay.flights) { flight in
-                    Button(action: {
-                        selectedFlight = flight
-                        showDetail = true
-                    }) {
-                        FlightCardView(flight: flight)
-                    }
-                    .buttonStyle(PlainButtonStyle())
-                }
-            }
-            .padding(.vertical, 4)
         }
         .padding()
+        .frame(height: isOff ? 80 : nil)
         .background(Color(.systemBackground))
         .cornerRadius(16)
-        .shadow(color: Color(.systemGray4), radius: 4, x: 0, y: 2)
-        .padding(.horizontal)
-        .padding(.vertical, 4)
+        .shadow(color: Color.black.opacity(0.08), radius: 4, x: 0, y: 2)
         .sheet(isPresented: $showDetail) {
             DayDetailView(rosterDay: rosterDay)
         }
@@ -81,8 +106,6 @@ struct DateCardView: View {
     }
 }
 
-
-
 struct SectionCard<Content: View>: View {
     let content: () -> Content
     var body: some View {
@@ -97,23 +120,40 @@ struct SectionCard<Content: View>: View {
 }
 
 #Preview {
-    DateCardView(rosterDay: RosterDay(
-        date: "2025-05-18",
-        duty: "FlD",
-        check_in: "0530",
-        check_out: "!1615",
-        flights: [
-            Flight(flight_num: "DY1858", departure: "BGO", arrival: "FCO", dep_time: "0630", arr_time: "0940", ac_type: "737NG"),
-            Flight(flight_num: "DY1859", departure: "FCO", arrival: "BGO", dep_time: "1025", arr_time: "1340", ac_type: "737NG"),
-            Flight(flight_num: "DH/DY623", departure: "BGO", arrival: "OSL", dep_time: "1500", arr_time: "1555", ac_type: nil)
-        ],
-        time_limits: [:],
-        info: ["To c/m:, Autorized by, flight OPS, to operate as, Picus in May, 2025 by CP, Vikse Lien"],
-        hotel: ["H1"],
-        crew: Crew(
-            cockpit: ["16704 Flaathen Kristoffer Wårås", "28719 Norrmyr Philip"],
-            cabin: ["10355 Mosfjeld Morten", "103830 Duncan Fiona Catherine"],
-            flight_num: "DY1858"
-        )
-    ))
+    VStack {
+        DateCardView(rosterDay: RosterDay(
+            date: "2025-05-18",
+            duty: "FlD",
+            check_in: "0530",
+            check_out: "1615",
+            flights: [
+                Flight(
+                    flight_num: "DY1858",
+                    departure: "BGO",
+                    arrival: "FCO",
+                    dep_time: "0630",
+                    arr_time: "0940",
+                    ac_type: "737NG"
+                )
+            ],
+            time_limits: [:],
+            info: [],
+            hotel: [],
+            crew: Crew(cockpit: [], cabin: [], flight_num: "")
+        ))
+        
+        DateCardView(rosterDay: RosterDay(
+            date: "2025-05-19",
+            duty: "off",
+            check_in: "<NA>",
+            check_out: "<NA>",
+            flights: [],
+            time_limits: [:],
+            info: [],
+            hotel: [],
+            crew: Crew(cockpit: [], cabin: [], flight_num: "")
+        ))
+    }
+    .padding()
+    .background(Color(.systemGroupedBackground))
 } 

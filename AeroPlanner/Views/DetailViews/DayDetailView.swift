@@ -8,6 +8,7 @@ struct DayDetailView: View {
                 VStack(alignment: .center, spacing: 8) {
                     Text(formattedDateLong(rosterDay.date))
                         .font(.title)
+                        .fontDesign(.rounded)
                         .foregroundColor(.blue)
                     HStack(spacing: 16) {
                         if let checkIn = rosterDay.check_in {
@@ -40,6 +41,7 @@ struct DayDetailView: View {
                 VStack(alignment: .leading, spacing: 12) {
                     Text("Flights")
                         .font(.title)
+                        .fontDesign(.rounded)
                         .fontWeight(.bold)
                         .foregroundColor(.primary)
                         .frame(maxWidth: .infinity, alignment: .leading)
@@ -55,6 +57,7 @@ struct DayDetailView: View {
                     VStack(alignment: .leading, spacing: 12) {
                         Text("Time Limits")
                             .font(.title)
+                            .fontDesign(.rounded)
                             .fontWeight(.bold)
                             .foregroundColor(.primary)
                             .frame(maxWidth: .infinity, alignment: .leading)
@@ -70,6 +73,7 @@ struct DayDetailView: View {
                 VStack(alignment: .leading, spacing: 12) {
                     Text("Hotel")
                         .font(.title)
+                        .fontDesign(.rounded)
                         .fontWeight(.bold)
                         .foregroundColor(.primary)
                         .frame(maxWidth: .infinity, alignment: .leading)
@@ -84,6 +88,7 @@ struct DayDetailView: View {
                 VStack(alignment: .leading, spacing: 12) {
                     Text("Crew")
                         .font(.title)
+                        .fontDesign(.rounded)
                         .fontWeight(.bold)
                         .foregroundColor(.primary)
                         .frame(maxWidth: .infinity, alignment: .leading)
@@ -99,6 +104,7 @@ struct DayDetailView: View {
                     VStack(alignment: .leading, spacing: 12) {
                         Text("Additional Information")
                             .font(.title)
+                            .fontDesign(.rounded)
                             .fontWeight(.bold)
                             .foregroundColor(.primary)
                             .frame(maxWidth: .infinity, alignment: .leading)

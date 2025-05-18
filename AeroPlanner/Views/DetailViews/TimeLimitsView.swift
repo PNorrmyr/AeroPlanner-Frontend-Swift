@@ -29,7 +29,7 @@ struct TimeLimitsView: View {
                     VStack(alignment: .leading, spacing: 4) {
                         HStack {
                             Text(key)
-                                .font(.system(size: 20, weight: .medium))
+                                .font(.system(size: 20, weight: .medium, design: .rounded))
                                 .foregroundColor(.secondary)
                                 .onTapGesture {
                                     withAnimation(.spring(response: 0.5, dampingFraction: 0.8)) {
@@ -42,14 +42,14 @@ struct TimeLimitsView: View {
                                 }
                             Spacer(minLength: 8)
                             Text(value)
-                                .font(.system(size: 20, weight: .regular))
+                                .font(.system(size: 20, weight: .regular, design: .rounded))
                                 .foregroundColor(.primary)
                         }
                         .frame(height: 24)
                         
                         if expandedKeys.contains(key) {
                             Text(translatedKey(key))
-                                .font(.system(size: 18))
+                                .font(.system(size: 18, design: .rounded))
                                 .foregroundColor(.secondary)
                                 .padding(.leading, 4)
                                 .transition(.move(edge: .top).combined(with: .opacity))

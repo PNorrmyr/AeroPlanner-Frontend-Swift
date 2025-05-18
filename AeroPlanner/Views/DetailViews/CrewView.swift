@@ -22,6 +22,7 @@ struct CrewView: View {
                 VStack(alignment: .leading, spacing: 10) {
                     Text("Cockpit")
                         .font(.system(size: 25))
+                        .fontDesign(.rounded)
                         .fontWeight(.medium)
                         .foregroundColor(.primary)
                         .frame(maxWidth: .infinity, alignment: .leading)
@@ -33,10 +34,12 @@ struct CrewView: View {
                             VStack(alignment: .leading, spacing: 4) {
                                 Text(formatted.name)
                                     .font(.system(size: 20))
+                                    .fontDesign(.rounded)
                                     .fontWeight(.medium)
                                     .fixedSize(horizontal: false, vertical: true)
                                 Text(formatted.position)
                                     .font(.system(size: 16))
+                                    .fontDesign(.rounded)
                                     .foregroundColor(.secondary)
                                     .lineLimit(1)
                             }
@@ -50,6 +53,7 @@ struct CrewView: View {
                 VStack(alignment: .leading, spacing: 10) {
                     Text("Cabin")
                         .font(.system(size: 25))
+                        .fontDesign(.rounded)
                         .fontWeight(.medium)
                         .foregroundColor(.primary)
                         .frame(maxWidth: .infinity, alignment: .leading)
@@ -62,10 +66,12 @@ struct CrewView: View {
                             VStack(alignment: .leading, spacing: 4) {
                                 Text(formatted.name)
                                     .font(.system(size: 20))
+                                    .fontDesign(.rounded)
                                     .fontWeight(.medium)
                                     .fixedSize(horizontal: false, vertical: true)
                                 Text(formatted.position)
                                     .font(.system(size: 16))
+                                    .fontDesign(.rounded)
                                     .foregroundColor(.secondary)
                                     .lineLimit(1)
                             }
@@ -79,6 +85,7 @@ struct CrewView: View {
             if crew.cockpit.isEmpty && crew.cabin.isEmpty {
                 Text("No crew information available")
                     .font(.body)
+                    .fontDesign(.rounded)
                     .foregroundColor(.gray)
             }
         }
