@@ -5,17 +5,21 @@ struct SidebarView: View {
     var onCacheCleared: () -> Void
     @State private var showClearCacheAlert = false
     @State private var showClearCacheConfirmation = false
+    @StateObject private var userService = UserService()
+    @State private var isLoggedOut = false
     
     var body: some View {
-        VStack(alignment: .leading, spacing: 32) {
+        VStack(alignment: .leading, spacing: 25) {
             HStack(spacing: 16) {
                 Image(systemName: "person.crop.circle")
                     .resizable()
                     .frame(width: 60, height: 60)
                     .foregroundColor(.blue)
                 VStack(alignment: .leading) {
-                    Text("User Name")
-                        .font(.headline)
+                    if let email = userService.currentUser?.email {
+                        Text(email)
+                            .font(.headline)
+                    }
                     Text("Flight Crew")
                         .font(.subheadline)
                         .foregroundColor(.gray)
@@ -56,6 +60,22 @@ struct SidebarView: View {
                 .cornerRadius(12)
                 .shadow(color: Color.blue.opacity(0.3), radius: 5, x: 0, y: 3)
             }
+            
+            Button(action: {
+                userService.logout()
+                isLoggedOut = true
+            }) {
+                HStack {
+                    Image(systemName: "rectangle.portrait.and.arrow.right")
+                    Text("Logout")
+                        .fontWeight(.semibold)
+                }
+                .frame(maxWidth: .infinity)
+                .padding(.vertical, 14)
+                .background(Color.red.opacity(0.8))
+                .foregroundColor(.white)
+                .cornerRadius(12)
+            }
             .padding(.bottom, 32)
         }
         .padding(.top, 60)
@@ -66,11 +86,16 @@ struct SidebarView: View {
         .alert("Clean cached data", isPresented: $showClearCacheAlert) {
             Button("Cancel", role: .cancel) { }
             Button("Confirm", role: .destructive) {
-                DataPersistenceManager.shared.clearRosterData()
-                onCacheCleared()
-                showClearCacheConfirmation = true
+                if let currentUser = userService.currentUser {
+                    DataPersistenceManager.shared.clearRosterData(for: currentUser.id.uuidString)
+                    onCacheCleared()
+                    showClearCacheConfirmation = true
+                }
             }
-        } 
+        }
+        .fullScreenCover(isPresented: $isLoggedOut) {
+            LoginView()
+        }
     }
 }
 

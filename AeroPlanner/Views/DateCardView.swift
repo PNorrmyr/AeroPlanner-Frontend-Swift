@@ -5,12 +5,71 @@ struct DateCardView: View {
     @State private var showDetail = false
     @State private var selectedFlight: Flight? = nil
     
+    private let standbyDutyCodes = ["SBY", "MIS", "ASB", "SSB"]
+    private let flightDutyCodes = ["C/I", "C/O", "PickUp", "DH", "Pick Up"]
+    private let groundDutyCodes = ["DG", "CBT", "RET3", "AID3", "TRA"]
+    private let offDutyCodes = ["DOF", "OFF", "VAC", "ILL", "ILM"]
+    
     var isOff: Bool {
-        rosterDay.duty.lowercased() == "off"
+        offDutyCodes.contains(rosterDay.duty.uppercased()) || rosterDay.duty.isEmpty
+    }
+    
+    var isStandby: Bool {
+        standbyDutyCodes.contains(rosterDay.duty.uppercased())
+    }
+    
+    var isGroundDuty: Bool {
+        groundDutyCodes.contains(rosterDay.duty.uppercased())
+    }
+    
+    var isFlightDuty: Bool {
+        flightDutyCodes.contains(rosterDay.duty.uppercased())
+    }
+    
+    var dutyText: String {
+        if rosterDay.duty.isEmpty {
+            return "Off"
+        }
+        if isFlightDuty {
+            return "F1D"
+        }
+        return rosterDay.duty
+    }
+    
+    var displayText: String {
+        if isOff {
+            if rosterDay.duty.isEmpty {
+                return "No data"
+            }
+            switch rosterDay.duty.uppercased() {
+            case "Off": return "Day Off"
+            case "VAC": return "Vacation"
+            case "ILL", "ILM": return "Illness"
+            default: return "Day Off"
+            }
+        } else if isStandby {
+            return "Standby"
+        } else if isGroundDuty {
+            return "Ground Duty"
+        }
+        return rosterDay.duty
+    }
+    
+    var dutyColor: Color {
+        if isOff {
+            return .gray
+        } else if isStandby {
+            return .orange
+        } else if isGroundDuty {
+            return .green
+        } else if isFlightDuty {
+            return .blue
+        }
+        return .blue
     }
     
     var body: some View {
-        VStack(spacing: isOff ? 4 : 12) {
+        VStack(spacing: 12) {
             HStack {
                 Text(formattedDate(rosterDay.date))
                     .font(.headline)
@@ -19,37 +78,35 @@ struct DateCardView: View {
                 
                 Spacer()
                 
-                Text(isOff ? "OFF" : rosterDay.duty)
+                Text(dutyText)
                     .font(.subheadline)
                     .fontDesign(.rounded)
                     .foregroundColor(.white)
                     .padding(.horizontal, 12)
                     .padding(.vertical, 4)
-                    .background(isOff ? Color.gray : Color.blue)
+                    .background(dutyColor)
                     .cornerRadius(8)
             }
             
-            // Check in/out och flygningar
-            if isOff {
-                Text("OFF")
-                    .font(.title2)
-                    .fontDesign(.rounded)
-                    .foregroundColor(.secondary)
-                    .frame(maxWidth: .infinity, alignment: .center)
-            } else {
-                HStack(spacing: 16) {
-                    if !rosterDay.flights.isEmpty {
-                        Text("\(rosterDay.flights.count) flights")
-                            .font(.subheadline)
-                            .fontDesign(.rounded)
-                            .foregroundColor(.secondary)
-                    }
-                    
-                    Spacer()
-                    
+            HStack(spacing: 16) {
+                if isOff || isStandby || isGroundDuty {
+                    Text(displayText)
+                        .font(.title2)
+                        .fontDesign(.rounded)
+                        .foregroundColor(.secondary)
+                } else if !rosterDay.flights.isEmpty {
+                    Text("\(rosterDay.flights.count) Flights")
+                        .font(.title2)
+                        .fontDesign(.rounded)
+                        .foregroundColor(.secondary)
+                }
+                
+                Spacer()
+                
+                if !isOff {
                     if let checkIn = rosterDay.check_in, checkIn.uppercased() != "<NA>" {
                         HStack(spacing: 4) {
-                            Image(systemName: "arrow.right.circle.fill")
+                            Image(systemName: "arrow.right.circle")
                                 .foregroundColor(.green)
                             Text(checkIn)
                                 .font(.subheadline)
@@ -58,21 +115,20 @@ struct DateCardView: View {
                     
                     if let checkOut = rosterDay.check_out, checkOut.uppercased() != "<NA>" {
                         HStack(spacing: 4) {
-                            Image(systemName: "arrow.right.circle.fill")
+                            Image(systemName: "arrow.right.circle")
                                 .foregroundColor(.red)
                             Text(checkOut)
                                 .font(.subheadline)
                         }
                     }
                 }
-                
-                if !rosterDay.flights.isEmpty {
-                    FlightSectionView(flights: rosterDay.flights)
-                }
+            }
+            
+            if !rosterDay.flights.isEmpty {
+                FlightSectionView(flights: rosterDay.flights)
             }
         }
         .padding()
-        .frame(height: isOff ? 80 : nil)
         .background(Color(.systemBackground))
         .cornerRadius(16)
         .shadow(color: Color.black.opacity(0.08), radius: 4, x: 0, y: 2)
@@ -139,19 +195,73 @@ struct SectionCard<Content: View>: View {
             time_limits: [:],
             info: [],
             hotel: [],
-            crew: Crew(cockpit: [], cabin: [], flight_num: "")
+            crew: Crew(cockpit: [], cabin: [], flight_num: ""),
+            crew_ground_event: []
         ))
         
         DateCardView(rosterDay: RosterDay(
             date: "2025-05-19",
-            duty: "off",
+            duty: "Off",
             check_in: "<NA>",
             check_out: "<NA>",
             flights: [],
             time_limits: [:],
             info: [],
             hotel: [],
-            crew: Crew(cockpit: [], cabin: [], flight_num: "")
+            crew: Crew(cockpit: [], cabin: [], flight_num: ""),
+            crew_ground_event: []
+        ))
+        
+        DateCardView(rosterDay: RosterDay(
+            date: "2025-05-20",
+            duty: "SBY",
+            check_in: "0600",
+            check_out: "1800",
+            flights: [],
+            time_limits: [:],
+            info: [],
+            hotel: [],
+            crew: Crew(cockpit: [], cabin: [], flight_num: ""),
+            crew_ground_event: []
+        ))
+        
+        DateCardView(rosterDay: RosterDay(
+            date: "2025-05-21",
+            duty: "DG",
+            check_in: "0600",
+            check_out: "1800",
+            flights: [],
+            time_limits: [:],
+            info: [],
+            hotel: [],
+            crew: Crew(cockpit: [], cabin: [], flight_num: ""),
+            crew_ground_event: ["10415 Seljås Svein Oddvar", "105943 Szwagrzak Katarzyna"]
+        ))
+        
+        DateCardView(rosterDay: RosterDay(
+            date: "2025-05-22",
+            duty: "VAC",
+            check_in: "<NA>",
+            check_out: "<NA>",
+            flights: [],
+            time_limits: [:],
+            info: [],
+            hotel: [],
+            crew: Crew(cockpit: [], cabin: [], flight_num: ""),
+            crew_ground_event: []
+        ))
+        
+        DateCardView(rosterDay: RosterDay(
+            date: "2025-05-23",
+            duty: "",
+            check_in: "<NA>",
+            check_out: "<NA>",
+            flights: [],
+            time_limits: [:],
+            info: [],
+            hotel: [],
+            crew: Crew(cockpit: [], cabin: [], flight_num: ""),
+            crew_ground_event: []
         ))
     }
     .padding()

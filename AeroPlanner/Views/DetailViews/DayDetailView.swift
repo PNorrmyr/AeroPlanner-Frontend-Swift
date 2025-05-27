@@ -2,16 +2,53 @@ import SwiftUI
 
 struct DayDetailView: View {
     let rosterDay: RosterDay
+    
+    private let standbyDutyCodes = ["SBY", "MIS", "ASB", "SSB"]
+    private let flightDutyCodes = ["C/I", "C/O", "PickUp", "DH", "Pick Up", "F1D"]
+    private let groundDutyCodes = ["DG", "CBT", "RET3", "AID3", "TRA"]
+    private let offDutyCodes = ["DOF", "OFF", "VAC", "ILL", "ILM", "NFF"]
+    
+    var isOff: Bool {
+        offDutyCodes.contains(rosterDay.duty.uppercased()) || rosterDay.duty.isEmpty
+    }
+    
+    var isStandby: Bool {
+        standbyDutyCodes.contains(rosterDay.duty.uppercased())
+    }
+    
+    var isGroundDuty: Bool {
+        groundDutyCodes.contains(rosterDay.duty.uppercased())
+    }
+    
+    var isFlightDuty: Bool {
+        flightDutyCodes.contains(rosterDay.duty.uppercased()) || !rosterDay.flights.isEmpty
+    }
+    
+    func getDutyDescription(_ duty: String) -> String {
+        switch duty.uppercased() {
+        case "DG": return "Dangerous Goods"
+        case "CBT": return "Computer Based Training"
+        case "TRA", "AID3": return "Classroom Training"
+        case "RET3": return "Simulator"
+        case "SBY": return "Standby"
+        case "MIS": return "Minimum Standby"
+        case "ASB": return "Additional Standby"
+        case "SSB": return "Short Standby"
+        default: return duty
+        }
+    }
+    
     var body: some View {
         ScrollView {
             VStack(alignment: .center, spacing: 20) {
+                // Header Section
                 VStack(alignment: .center, spacing: 8) {
                     Text(formattedDateLong(rosterDay.date))
                         .font(.title)
                         .fontDesign(.rounded)
                         .foregroundColor(.blue)
                     HStack(spacing: 16) {
-                        if let checkIn = rosterDay.check_in {
+                        if let checkIn = rosterDay.check_in, checkIn.uppercased() != "<NA>" {
                             HStack(spacing: 4) {
                                 Image(systemName: "arrow.right.circle")
                                     .foregroundColor(.green)
@@ -20,7 +57,7 @@ struct DayDetailView: View {
                                     .font(.system(size: 16, weight: .medium))
                             }
                         }
-                        if let checkOut = rosterDay.check_out {
+                        if let checkOut = rosterDay.check_out, checkOut.uppercased() != "<NA>" {
                             HStack(spacing: 4) {
                                 Image(systemName: "arrow.right.circle")
                                     .foregroundColor(.red)
@@ -37,22 +74,42 @@ struct DayDetailView: View {
                 .cornerRadius(16)
                 .shadow(color: Color(.systemGray4), radius: 4, x: 0, y: 2)
                 
-                // Flights
-                VStack(alignment: .leading, spacing: 12) {
-                    Text("Flights")
-                        .font(.title)
-                        .fontDesign(.rounded)
-                        .fontWeight(.bold)
-                        .foregroundColor(.primary)
-                        .frame(maxWidth: .infinity, alignment: .leading)
-                    FlightSectionView(flights: rosterDay.flights)
+                // Duty or Flights Section
+                if !rosterDay.flights.isEmpty || rosterDay.duty.uppercased() == "F1D" {
+                    VStack(alignment: .leading, spacing: 12) {
+                        Text("Flights")
+                            .font(.title)
+                            .fontDesign(.rounded)
+                            .fontWeight(.bold)
+                            .foregroundColor(.primary)
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                        FlightSectionView(flights: rosterDay.flights)
+                    }
+                    .padding()
+                    .background(Color(.systemBackground))
+                    .cornerRadius(16)
+                    .shadow(color: Color(.systemGray4), radius: 4, x: 0, y: 2)
+                } else if !isOff {
+                    VStack(alignment: .leading, spacing: 12) {
+                        Text("Duty")
+                            .font(.title)
+                            .fontDesign(.rounded)
+                            .fontWeight(.bold)
+                            .foregroundColor(.primary)
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                        Text(getDutyDescription(rosterDay.duty))
+                            .font(.title2)
+                            .fontDesign(.rounded)
+                            .foregroundColor(.secondary)
+                            .padding(.vertical, 8)
+                    }
+                    .padding()
+                    .background(Color(.systemBackground))
+                    .cornerRadius(16)
+                    .shadow(color: Color(.systemGray4), radius: 4, x: 0, y: 2)
                 }
-                .padding()
-                .background(Color(.systemBackground))
-                .cornerRadius(16)
-                .shadow(color: Color(.systemGray4), radius: 4, x: 0, y: 2)
                 
-                // Time limits
+                // Time Limits Section
                 if !rosterDay.time_limits.isEmpty {
                     VStack(alignment: .leading, spacing: 12) {
                         Text("Time Limits")
@@ -69,37 +126,41 @@ struct DayDetailView: View {
                     .shadow(color: Color(.systemGray4), radius: 4, x: 0, y: 2)
                 }
                 
-                // Hotel
-                VStack(alignment: .leading, spacing: 12) {
-                    Text("Hotel")
-                        .font(.title)
-                        .fontDesign(.rounded)
-                        .fontWeight(.bold)
-                        .foregroundColor(.primary)
-                        .frame(maxWidth: .infinity, alignment: .leading)
-                    HotelView(hotels: rosterDay.hotel)
+                // Hotel Section
+                if !rosterDay.hotel.isEmpty {
+                    VStack(alignment: .leading, spacing: 12) {
+                        Text("Hotel")
+                            .font(.title)
+                            .fontDesign(.rounded)
+                            .fontWeight(.bold)
+                            .foregroundColor(.primary)
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                        HotelView(hotels: rosterDay.hotel)
+                    }
+                    .padding()
+                    .background(Color(.systemBackground))
+                    .cornerRadius(16)
+                    .shadow(color: Color(.systemGray4), radius: 4, x: 0, y: 2)
                 }
-                .padding()
-                .background(Color(.systemBackground))
-                .cornerRadius(16)
-                .shadow(color: Color(.systemGray4), radius: 4, x: 0, y: 2)
                 
-                // Crew
-                VStack(alignment: .leading, spacing: 12) {
-                    Text("Crew")
-                        .font(.title)
-                        .fontDesign(.rounded)
-                        .fontWeight(.bold)
-                        .foregroundColor(.primary)
-                        .frame(maxWidth: .infinity, alignment: .leading)
-                    CrewView(crew: rosterDay.crew)
+                // Crew Section
+                if !rosterDay.crew.cockpit.isEmpty || !rosterDay.crew.cabin.isEmpty || !rosterDay.crew_ground_event.isEmpty {
+                    VStack(alignment: .leading, spacing: 12) {
+                        Text("Crew")
+                            .font(.title)
+                            .fontDesign(.rounded)
+                            .fontWeight(.bold)
+                            .foregroundColor(.primary)
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                        CrewView(crew: rosterDay.crew, crew_ground_event: rosterDay.crew_ground_event)
+                    }
+                    .padding()
+                    .background(Color(.systemBackground))
+                    .cornerRadius(16)
+                    .shadow(color: Color(.systemGray4), radius: 4, x: 0, y: 2)
                 }
-                .padding()
-                .background(Color(.systemBackground))
-                .cornerRadius(16)
-                .shadow(color: Color(.systemGray4), radius: 4, x: 0, y: 2)
                 
-                // Info
+                // Additional Info Section
                 if !rosterDay.info.isEmpty {
                     VStack(alignment: .leading, spacing: 12) {
                         Text("Additional Information")
@@ -159,30 +220,17 @@ struct DayDetailView: View {
 #Preview {
     DayDetailView(rosterDay: RosterDay(
         date: "2025-05-18",
-        duty: "FlD",
+        duty: "F1D",
         check_in: "0530",
-        check_out: "!1615",
-        flights: [
-            Flight(flight_num: "DY1858", departure: "BGO", arrival: "FCO", dep_time: "0630", arr_time: "0940", ac_type: "737NG"),
-            Flight(flight_num: "DY1859", departure: "FCO", arrival: "BGO", dep_time: "1025", arr_time: "1340", ac_type: "737NG")
-        ],
+        check_out: "1615",
+        flights: [],
         time_limits: [
             "FT": "06:25",
-            "DT": "10:45",
-            "FDT": "08:10",
-            "FDP": "08:10",
-            "RT": "19/0415",
-            "BRK": "015:55",
-            "mFDP": "12:30",
-            "xFDP": "00:00",
-            "DTwSB": "10:45"
+            "DT": "10:45"
         ],
-        info: ["To c/m:, Autorized by, flight OPS, to operate as, Picus in May, 2025 by CP, Vikse Lien"],
-        hotel: ["H1"],
-        crew: Crew(
-            cockpit: ["16704 Flaathen Kristoffer Wårås", "28719 Norrmyr Philip"],
-            cabin: ["10355 Mosfjeld Morten", "103830 Duncan Fiona Catherine"],
-            flight_num: "DY1858"
-        )
+        info: ["Dangerous Goods Training"],
+        hotel: [],
+        crew: Crew(cockpit: ["28719 Philip Norrmyr"], cabin: [], flight_num: ""),
+        crew_ground_event: []
     ))
 } 

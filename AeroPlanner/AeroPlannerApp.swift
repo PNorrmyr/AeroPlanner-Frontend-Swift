@@ -9,9 +9,15 @@ import SwiftUI
 
 @main
 struct AeroPlannerApp: App {
+    @StateObject private var userService = UserService()
+    
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            if userService.currentUser != nil {
+                ContentView()
+            } else {
+                LoginView()
+            }
         }
     }
 }

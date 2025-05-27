@@ -13,6 +13,7 @@ struct ContentView: View {
     @State private var showDocumentPicker = false
     @State private var rosterDays: [RosterDay] = []
     @StateObject private var apiService = APIService()
+    @StateObject private var userService = UserService()
     @State private var showError = false
     
     var body: some View {
@@ -58,13 +59,16 @@ struct ContentView: View {
                         .onTapGesture { withAnimation { showSidebar = false } }
                 }
                 
-                SidebarView(onUpload: { showDocumentPicker = true }, onCacheCleared: {
-                    withAnimation {
-                        rosterDays = []
-                    }
-                })
+                if let currentUser = userService.currentUser {
+                    SidebarView(onUpload: { showDocumentPicker = true }, onCacheCleared: {
+                        withAnimation {
+                            rosterDays = []
+                            DataPersistenceManager.shared.clearRosterData(for: currentUser.id.uuidString)
+                        }
+                    })
                     .offset(x: showSidebar ? 0 : -320)
                     .animation(.easeInOut, value: showSidebar)
+                }
                 
                 if apiService.isLoading {
                     ZStack {
@@ -96,24 +100,26 @@ struct ContentView: View {
             }
             .alert("Error", isPresented: $showError) {
                 Button("OK", role: .cancel) { }
-            } message: {
                 Text(apiService.error ?? "An unknown error occurred")
             }
         }
         .onAppear {
-            if let savedRosterDays = DataPersistenceManager.shared.loadRosterDays() {
+            if let currentUser = userService.currentUser,
+               let savedRosterDays = DataPersistenceManager.shared.loadRosterDays(for: currentUser.id.uuidString) {
                 rosterDays = savedRosterDays
             }
         }
     }
     
     func uploadPDF(url: URL) async {
+        guard let currentUser = userService.currentUser else { return }
+        
         do {
             let days = try await apiService.uploadPDF(url: url)
             withAnimation(.spring(response: 0.5, dampingFraction: 0.7)) {
                 rosterDays = days
                 showSidebar = false
-                DataPersistenceManager.shared.saveRosterDays(days)
+                DataPersistenceManager.shared.saveRosterDays(days, for: currentUser.id.uuidString)
             }
         } catch {
             apiService.error = error.localizedDescription

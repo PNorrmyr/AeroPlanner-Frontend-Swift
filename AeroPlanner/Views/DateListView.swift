@@ -38,14 +38,15 @@ struct DateListView: View {
                         } else {
                             DateCardView(rosterDay: RosterDay(
                                 date: dateString,
-                                duty: "OFF",
+                                duty: "",
                                 check_in: nil,
                                 check_out: nil,
                                 flights: [],
                                 time_limits: [:],
                                 info: [],
                                 hotel: [],
-                                crew: Crew(cockpit: [], cabin: [], flight_num: "")
+                                crew: Crew(cockpit: [], cabin: [], flight_num: ""),
+                                crew_ground_event: []
                             ))
                         }
                     }
@@ -98,7 +99,8 @@ struct DateListView: View {
                 cockpit: ["16704 Flaathen Kristoffer Wårås"],
                 cabin: ["10355 Mosfjeld Morten"],
                 flight_num: "DY1858"
-            )
+            ),
+            crew_ground_event: []
         )
     ])
 } 

@@ -24,20 +24,19 @@ enum APIError: Error, LocalizedError {
     }
 }
 
-class APIService: ObservableObject {
+@MainActor
+final class APIService: ObservableObject {
     @Published var isLoading = false
     @Published var error: String?
     
-    private let baseURL = "http://192.168.0.14:5000/api/data"
+    private let baseURL = "http://127.0.0.1:5001/api/data"
     
     func uploadPDF(url: URL) async throws -> [RosterDay] {
         isLoading = true
         error = nil
         
         defer {
-            DispatchQueue.main.async {
-                self.isLoading = false
-            }
+            isLoading = false
         }
         
         guard let requestURL = URL(string: baseURL) else {
@@ -47,6 +46,7 @@ class APIService: ObservableObject {
         var request = URLRequest(url: requestURL)
         request.httpMethod = "POST"
         
+        // create the multipart form-data
         let boundary = UUID().uuidString
         request.setValue("multipart/form-data; boundary=\(boundary)", forHTTPHeaderField: "Content-Type")
         
@@ -83,9 +83,13 @@ class APIService: ObservableObject {
                 throw APIError.serverError(httpResponse.statusCode, message)
             }
             
+            // if response 200, decode it
             let decoder = JSONDecoder()
             do {
+                // Date dict
                 let dict = try decoder.decode([String: RosterDayRaw].self, from: responseData)
+                
+                // Date dict converts each key/value to a RosterDay
                 let days = dict.map { (key, value) -> RosterDay in
                     value.toRosterDay(date: key)
                 }

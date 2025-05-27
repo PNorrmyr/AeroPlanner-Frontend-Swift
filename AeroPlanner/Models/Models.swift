@@ -11,6 +11,7 @@ struct RosterDay: Codable, Identifiable {
     let info: [String]
     let hotel: [String]
     let crew: Crew
+    let crew_ground_event: [String]
     
     var id: String { date }
 }
@@ -42,6 +43,7 @@ struct RosterDayRaw: Codable {
     let info: [String]
     let hotel: [String]
     let crew: Crew
+    let crew_ground_event: [String]
     
     func toRosterDay(date: String) -> RosterDay {
         RosterDay(
@@ -53,7 +55,8 @@ struct RosterDayRaw: Codable {
             time_limits: time_limits,
             info: info,
             hotel: hotel,
-            crew: crew
+            crew: crew,
+            crew_ground_event: crew_ground_event
         )
     }
 } 
