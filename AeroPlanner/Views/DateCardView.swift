@@ -8,7 +8,8 @@ struct DateCardView: View {
     private let standbyDutyCodes = ["SBY", "MIS", "ASB", "SSB"]
     private let flightDutyCodes = ["C/I", "C/O", "PickUp", "DH", "Pick Up"]
     private let groundDutyCodes = ["DG", "CBT", "RET3", "AID3", "TRA"]
-    private let offDutyCodes = ["DOF", "OFF", "VAC", "ILL", "ILM"]
+    private let offDutyCodes = ["DOF", "OFF", "VAC"]
+    private let sickDutyCodes = ["ILL", "ILM", "SIC"]
     
     var isOff: Bool {
         offDutyCodes.contains(rosterDay.duty.uppercased()) || rosterDay.duty.isEmpty
@@ -26,6 +27,10 @@ struct DateCardView: View {
         flightDutyCodes.contains(rosterDay.duty.uppercased())
     }
     
+    var isSickDuty: Bool {
+        sickDutyCodes.contains(rosterDay.duty.uppercased())
+    }
+    
     var dutyText: String {
         if rosterDay.duty.isEmpty {
             return "Off"
@@ -37,14 +42,14 @@ struct DateCardView: View {
     }
     
     var displayText: String {
-        if isOff {
+        if isOff || isSickDuty {
             if rosterDay.duty.isEmpty {
                 return "No data"
             }
             switch rosterDay.duty.uppercased() {
             case "Off": return "Day Off"
             case "VAC": return "Vacation"
-            case "ILL", "ILM": return "Illness"
+            case "ILL", "ILM", "SIC": return "Illness"
             default: return "Day Off"
             }
         } else if isStandby {
@@ -64,6 +69,8 @@ struct DateCardView: View {
             return .green
         } else if isFlightDuty {
             return .blue
+        } else if isSickDuty {
+            return .red
         }
         return .blue
     }
@@ -78,7 +85,7 @@ struct DateCardView: View {
                 
                 Spacer()
                 
-                Text(dutyText)
+                Text(dutyText.uppercased())
                     .font(.subheadline)
                     .fontDesign(.rounded)
                     .foregroundColor(.white)
@@ -89,13 +96,13 @@ struct DateCardView: View {
             }
             
             HStack(spacing: 16) {
-                if isOff || isStandby || isGroundDuty {
+                if isOff || isStandby || isGroundDuty || isSickDuty {
                     Text(displayText)
                         .font(.title2)
                         .fontDesign(.rounded)
                         .foregroundColor(.secondary)
-                } else if !rosterDay.flights.isEmpty {
-                    Text("\(rosterDay.flights.count) Flights")
+                } else if let flights = rosterDay.flights, !flights.isEmpty {
+                    Text("\(flights.count) Flights")
                         .font(.title2)
                         .fontDesign(.rounded)
                         .foregroundColor(.secondary)
@@ -124,8 +131,8 @@ struct DateCardView: View {
                 }
             }
             
-            if !rosterDay.flights.isEmpty {
-                FlightSectionView(flights: rosterDay.flights)
+            if let flights = rosterDay.flights, !flights.isEmpty {
+                FlightSectionView(flights: flights)
             }
         }
         .padding()
@@ -201,7 +208,7 @@ struct SectionCard<Content: View>: View {
         
         DateCardView(rosterDay: RosterDay(
             date: "2025-05-19",
-            duty: "Off",
+            duty: "Sic",
             check_in: "<NA>",
             check_out: "<NA>",
             flights: [],

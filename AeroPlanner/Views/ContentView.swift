@@ -115,11 +115,22 @@ struct ContentView: View {
         guard let currentUser = userService.currentUser else { return }
         
         do {
-            let days = try await apiService.uploadPDF(url: url)
+            let newDays = try await apiService.uploadPDF(url: url)
             withAnimation(.spring(response: 0.5, dampingFraction: 0.7)) {
-                rosterDays = days
+                var updatedDays = rosterDays
+                
+                for newDay in newDays {
+                    if let existingIndex = updatedDays.firstIndex(where: { $0.date == newDay.date }) {
+                        updatedDays[existingIndex] = newDay
+                    } else {
+                        updatedDays.append(newDay)
+                    }
+                }
+                
+                rosterDays = updatedDays.sorted { $0.date < $1.date }
+                
                 showSidebar = false
-                DataPersistenceManager.shared.saveRosterDays(days, for: currentUser.id.uuidString)
+                DataPersistenceManager.shared.saveRosterDays(rosterDays, for: currentUser.id.uuidString)
             }
         } catch {
             apiService.error = error.localizedDescription

@@ -21,7 +21,8 @@ struct DayDetailView: View {
     }
     
     var isFlightDuty: Bool {
-        flightDutyCodes.contains(rosterDay.duty.uppercased()) || !rosterDay.flights.isEmpty
+        let hasFlights = (rosterDay.flights ?? []).isEmpty == false
+        return flightDutyCodes.contains(rosterDay.duty.uppercased()) || hasFlights
     }
     
     func getDutyDescription(_ duty: String) -> String {
@@ -75,7 +76,7 @@ struct DayDetailView: View {
                 .shadow(color: Color(.systemGray4), radius: 4, x: 0, y: 2)
                 
                 // Duty or Flights Section
-                if !rosterDay.flights.isEmpty || rosterDay.duty.uppercased() == "F1D" {
+                if let flights = rosterDay.flights, !flights.isEmpty || rosterDay.duty.uppercased() == "F1D" {
                     VStack(alignment: .leading, spacing: 12) {
                         Text("Flights")
                             .font(.title)
@@ -83,7 +84,9 @@ struct DayDetailView: View {
                             .fontWeight(.bold)
                             .foregroundColor(.primary)
                             .frame(maxWidth: .infinity, alignment: .leading)
-                        FlightSectionView(flights: rosterDay.flights)
+                        if let flights = rosterDay.flights {
+                            FlightSectionView(flights: flights)
+                        }
                     }
                     .padding()
                     .background(Color(.systemBackground))
@@ -110,7 +113,7 @@ struct DayDetailView: View {
                 }
                 
                 // Time Limits Section
-                if !rosterDay.time_limits.isEmpty {
+                if let timeLimits = rosterDay.time_limits, !timeLimits.isEmpty {
                     VStack(alignment: .leading, spacing: 12) {
                         Text("Time Limits")
                             .font(.title)
@@ -118,7 +121,7 @@ struct DayDetailView: View {
                             .fontWeight(.bold)
                             .foregroundColor(.primary)
                             .frame(maxWidth: .infinity, alignment: .leading)
-                        TimeLimitsView(timeLimits: rosterDay.time_limits)
+                        TimeLimitsView(timeLimits: timeLimits)
                     }
                     .padding()
                     .background(Color(.systemBackground))
@@ -127,7 +130,7 @@ struct DayDetailView: View {
                 }
                 
                 // Hotel Section
-                if !rosterDay.hotel.isEmpty {
+                if let hotels = rosterDay.hotel, !hotels.isEmpty {
                     VStack(alignment: .leading, spacing: 12) {
                         Text("Hotel")
                             .font(.title)
@@ -135,7 +138,7 @@ struct DayDetailView: View {
                             .fontWeight(.bold)
                             .foregroundColor(.primary)
                             .frame(maxWidth: .infinity, alignment: .leading)
-                        HotelView(hotels: rosterDay.hotel)
+                        HotelView(hotels: hotels)
                     }
                     .padding()
                     .background(Color(.systemBackground))
@@ -144,7 +147,11 @@ struct DayDetailView: View {
                 }
                 
                 // Crew Section
-                if !rosterDay.crew.cockpit.isEmpty || !rosterDay.crew.cabin.isEmpty || !rosterDay.crew_ground_event.isEmpty {
+                let hasCockpitCrew = (rosterDay.crew.cockpit ?? []).isEmpty == false
+                let hasCabinCrew = (rosterDay.crew.cabin ?? []).isEmpty == false
+                let hasGroundCrew = (rosterDay.crew_ground_event ?? []).isEmpty == false
+                
+                if hasCockpitCrew || hasCabinCrew || hasGroundCrew {
                     VStack(alignment: .leading, spacing: 12) {
                         Text("Crew")
                             .font(.title)
@@ -161,7 +168,7 @@ struct DayDetailView: View {
                 }
                 
                 // Additional Info Section
-                if !rosterDay.info.isEmpty {
+                if let info = rosterDay.info, !info.isEmpty {
                     VStack(alignment: .leading, spacing: 12) {
                         Text("Additional Information")
                             .font(.title)
@@ -169,7 +176,7 @@ struct DayDetailView: View {
                             .fontWeight(.bold)
                             .foregroundColor(.primary)
                             .frame(maxWidth: .infinity, alignment: .leading)
-                        AdditionalInfoView(infoItems: rosterDay.info)
+                        AdditionalInfoView(infoItems: info)
                     }
                     .padding()
                     .background(Color(.systemBackground))

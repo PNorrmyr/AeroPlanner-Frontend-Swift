@@ -2,7 +2,7 @@ import SwiftUI
 
 struct CrewView: View {
     let crew: Crew
-    let crew_ground_event: [String]
+    let crew_ground_event: [String]?
     
     private func formatCrewMember(_ member: String) -> (name: String, position: String) {
         let components = member.split(separator: " ", maxSplits: 1)
@@ -20,76 +20,10 @@ struct CrewView: View {
     
     var body: some View {
         VStack(alignment: .leading, spacing: 24) {
-            if !crew.cockpit.isEmpty || !crew.cabin.isEmpty {
+            if let cockpit = crew.cockpit, !cockpit.isEmpty {
                 // Flight Crew Section
-                if !crew.cockpit.isEmpty {
-                    VStack(alignment: .leading, spacing: 10) {
-                        Text("Cockpit")
-                            .font(.system(size: 25))
-                            .fontDesign(.rounded)
-                            .fontWeight(.medium)
-                            .foregroundColor(.primary)
-                            .frame(maxWidth: .infinity, alignment: .leading)
-                        Divider()
-                        
-                        LazyVGrid(columns: gridLayout, alignment: .leading, spacing: 16) {
-                            ForEach(Array(crew.cockpit.enumerated()), id: \.offset) { _, member in
-                                let formatted = formatCrewMember(member)
-                                VStack(alignment: .leading, spacing: 4) {
-                                    Text(formatted.name)
-                                        .font(.system(size: 20))
-                                        .fontDesign(.rounded)
-                                        .fontWeight(.medium)
-                                        .fixedSize(horizontal: false, vertical: true)
-                                    Text(formatted.position)
-                                        .font(.system(size: 16))
-                                        .fontDesign(.rounded)
-                                        .foregroundColor(.secondary)
-                                        .lineLimit(1)
-                                }
-                                .frame(maxWidth: .infinity, alignment: .leading)
-                                .frame(minHeight: 44)
-                            }
-                        }
-                    }
-                }
-                
-                if !crew.cabin.isEmpty {
-                    VStack(alignment: .leading, spacing: 10) {
-                        Text("Cabin")
-                            .font(.system(size: 25))
-                            .fontDesign(.rounded)
-                            .fontWeight(.medium)
-                            .foregroundColor(.primary)
-                            .frame(maxWidth: .infinity, alignment: .leading)
-                        
-                        Divider()
-                        
-                        LazyVGrid(columns: gridLayout, alignment: .leading, spacing: 16) {
-                            ForEach(Array(crew.cabin.enumerated()), id: \.offset) { _, member in
-                                let formatted = formatCrewMember(member)
-                                VStack(alignment: .leading, spacing: 4) {
-                                    Text(formatted.name)
-                                        .font(.system(size: 20))
-                                        .fontDesign(.rounded)
-                                        .fontWeight(.medium)
-                                        .fixedSize(horizontal: false, vertical: true)
-                                    Text(formatted.position)
-                                        .font(.system(size: 16))
-                                        .fontDesign(.rounded)
-                                        .foregroundColor(.secondary)
-                                        .lineLimit(1)
-                                }
-                                .frame(maxWidth: .infinity, alignment: .leading)
-                                .frame(minHeight: 44)
-                            }
-                        }
-                    }
-                }
-            } else if !crew_ground_event.isEmpty {
-                // Ground Event Crew Section
                 VStack(alignment: .leading, spacing: 10) {
-                    Text("Ground Event Crew")
+                    Text("Cockpit")
                         .font(.system(size: 25))
                         .fontDesign(.rounded)
                         .fontWeight(.medium)
@@ -98,7 +32,7 @@ struct CrewView: View {
                     Divider()
                     
                     LazyVGrid(columns: gridLayout, alignment: .leading, spacing: 16) {
-                        ForEach(Array(crew_ground_event.enumerated()), id: \.offset) { _, member in
+                        ForEach(Array(cockpit.enumerated()), id: \.offset) { _, member in
                             let formatted = formatCrewMember(member)
                             VStack(alignment: .leading, spacing: 4) {
                                 Text(formatted.name)
@@ -117,7 +51,77 @@ struct CrewView: View {
                         }
                     }
                 }
-            } else {
+            }
+            
+            if let cabin = crew.cabin, !cabin.isEmpty {
+                VStack(alignment: .leading, spacing: 10) {
+                    Text("Cabin")
+                        .font(.system(size: 25))
+                        .fontDesign(.rounded)
+                        .fontWeight(.medium)
+                        .foregroundColor(.primary)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                    
+                    Divider()
+                    
+                    LazyVGrid(columns: gridLayout, alignment: .leading, spacing: 16) {
+                        ForEach(Array(cabin.enumerated()), id: \.offset) { _, member in
+                            let formatted = formatCrewMember(member)
+                            VStack(alignment: .leading, spacing: 4) {
+                                Text(formatted.name)
+                                    .font(.system(size: 20))
+                                    .fontDesign(.rounded)
+                                    .fontWeight(.medium)
+                                    .fixedSize(horizontal: false, vertical: true)
+                                Text(formatted.position)
+                                    .font(.system(size: 16))
+                                    .fontDesign(.rounded)
+                                    .foregroundColor(.secondary)
+                                    .lineLimit(1)
+                            }
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                            .frame(minHeight: 44)
+                        }
+                    }
+                }
+            }
+            
+            if let groundCrew = crew_ground_event, !groundCrew.isEmpty {
+                // Ground Event Crew Section
+                VStack(alignment: .leading, spacing: 10) {
+                    Text("Ground Event Crew")
+                        .font(.system(size: 25))
+                        .fontDesign(.rounded)
+                        .fontWeight(.medium)
+                        .foregroundColor(.primary)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                    Divider()
+                    
+                    LazyVGrid(columns: gridLayout, alignment: .leading, spacing: 16) {
+                        ForEach(Array(groundCrew.enumerated()), id: \.offset) { _, member in
+                            let formatted = formatCrewMember(member)
+                            VStack(alignment: .leading, spacing: 4) {
+                                Text(formatted.name)
+                                    .font(.system(size: 20))
+                                    .fontDesign(.rounded)
+                                    .fontWeight(.medium)
+                                    .fixedSize(horizontal: false, vertical: true)
+                                Text(formatted.position)
+                                    .font(.system(size: 16))
+                                    .fontDesign(.rounded)
+                                    .foregroundColor(.secondary)
+                                    .lineLimit(1)
+                            }
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                            .frame(minHeight: 44)
+                        }
+                    }
+                }
+            }
+            
+            if (crew.cockpit == nil || crew.cockpit?.isEmpty == true) &&
+               (crew.cabin == nil || crew.cabin?.isEmpty == true) &&
+               (crew_ground_event == nil || crew_ground_event?.isEmpty == true) {
                 Text("No crew information available")
                     .font(.body)
                     .fontDesign(.rounded)
@@ -142,7 +146,7 @@ struct CrewView: View {
                 ],
                 flight_num: "DY537"
             ),
-            crew_ground_event: []
+            crew_ground_event: nil
         )
         .padding()
         .background(Color(.systemBackground))

@@ -114,7 +114,7 @@ final class APIService: ObservableObject {
                         throw APIError.decodingError(error)
                     }
                 }
-                throw APIError.decodingError(NSError(domain: "DecodingError", code: -1, userInfo: [NSLocalizedDescriptionKey: "Failed to decode server response"]))
+                throw APIError.decodingError(error)
             }
         } catch let error as APIError {
             throw error
